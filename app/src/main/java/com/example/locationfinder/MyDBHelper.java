@@ -19,7 +19,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
     private static final String LAT_COL = "latitude";
     private static final String LON_COL = "longitude";
 
-    public MyDBHelper(Context context) {
+    MyDBHelper(Context context) {
         super(context, DB_NAME, null, DB_VER);
         this.context = context;
     }
@@ -41,6 +41,7 @@ public class MyDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // Method to add a new address to the database
     void addAddress(String address, Double latitude, Double longitude){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -57,16 +58,37 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Method to read all the data from the database
     Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
         }
-
         return cursor;
     }
 
+    // Method to update data in the database
+    void updateData(String row_id, String address, String latitude, String longitude){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ADDRESS_COL, address);
+        cv.put(LAT_COL, latitude);
+        cv.put(LON_COL, longitude);
+
+        long result = db.update(TABLE_NAME, cv, "id=?", new String[]{row_id});
+        if(result == -1){
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+        } else{
+            Toast.makeText(context, "Successfully updated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Method to delete data from the database based on ID
+    public boolean deleteData(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(TABLE_NAME, "id=?", new String[]{id});
+        return result != -1;  // Return true if successful, false otherwise
+    }
 }
