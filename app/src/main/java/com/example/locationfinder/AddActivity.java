@@ -18,11 +18,11 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        address_input = findViewById(R.id.address);
-        latitude_input = findViewById(R.id.latitude);
-        longitude_input = findViewById(R.id.longitude);
-        addNew = findViewById(R.id.addNew);
-        backBtn = findViewById(R.id.backBtn);
+        address_input = findViewById(R.id.address2);
+        latitude_input = findViewById(R.id.latitude2);
+        longitude_input = findViewById(R.id.longitude2);
+        addNew = findViewById(R.id.update);
+        backBtn = findViewById(R.id.backBtn2);
 
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
