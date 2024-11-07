@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddActivity extends AppCompatActivity {
 
     EditText address_input, latitude_input, longitude_input;
-    Button addNew;
+    Button addNew, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class AddActivity extends AppCompatActivity {
         latitude_input = findViewById(R.id.latitude);
         longitude_input = findViewById(R.id.longitude);
         addNew = findViewById(R.id.addNew);
+        backBtn = findViewById(R.id.backBtn);
 
         addNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +59,13 @@ public class AddActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {
                     Toast.makeText(AddActivity.this, "Invalid latitude or longitude format", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
